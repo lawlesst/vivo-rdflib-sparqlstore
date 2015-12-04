@@ -2,24 +2,27 @@
 Example of using the RDFLib store API with the VIVO
 SPARQL endpoint.
 """
+import os
 
-from rdflib import Graph, URIRef, RDF
-from rdflib.namespace import SKOS
+from rdflib import Graph, URIRef, RDF, Literal
+from rdflib.graph import Resource
+from rdflib.namespace import SKOS, RDFS
 
 from vstore import VIVOUpdateStore, VIVOStore
 
-VIVO_EMAIL = 'user@school.edu'
-VIVO_PASSWORD = 'xxx'
+VIVO_EMAIL = os.environ['VIVO_EMAIL']
+VIVO_PASSWORD = os.environ['VIVO_PASSWORD']
+VIVO_BASE = os.environ['VIVO_BASE']
 
-#Define the VIVO store
-query_endpoint = 'http://localhost:8080/vivo/api/sparqlQuery'
-update_endpoint = 'http://localhost:8080/vivo/api/sparqlUpdate'
+# Define the VIVO store
+query_endpoint = VIVO_BASE + '/api/sparqlQuery'
+update_endpoint = VIVO_BASE + '/api/sparqlUpdate'
 
-#Setup the VIVO store
+# Setup the VIVO store
 store = VIVOUpdateStore(VIVO_EMAIL, VIVO_PASSWORD)
 store.open((query_endpoint, update_endpoint))
 
-#Identify a named graph where we will be adding our instances.
+# Identify a named graph where we will be adding our instances.
 default_graph = URIRef('http://example.org/vstore-test-graph')
 named_graph = Graph(store, identifier=default_graph)
 
@@ -46,12 +49,31 @@ g.parse(data=
 
 print g.serialize(format='n3')
 
-# Issue a SPARQL INSERT update query to add the assertions
-# to VIVO.
-named_graph.update(
-    u'INSERT DATA { %s }' % g.serialize(format='nt')
-)
 
-#All concepts in the named graph.
+# Add the data using the RDFLib API
+named_graph += g
+
+# List all concepts in the named graph.
 for subj in named_graph.subjects(predicate=RDF.type, object=SKOS.Concept):
     print 'Concept: ', subj
+
+# Remove the graph
+named_graph -= g
+
+# Attempt to retrieve a deleted URI
+baseball_uri = URIRef('http://example.org/n1234')
+assert named_graph.value(subject=baseball_uri) == None
+
+# Re-add the concept using the RDFLib API rather than SPARQL
+bball = Resource(named_graph, baseball_uri)
+bball.set(RDF.type, SKOS.Concept)
+bball.set(RDFS.label, Literal("Baseball"))
+
+# Fetch the label for the resource from the VIVO store using the RDFLib API.
+assert named_graph.value(subject=baseball_uri, predicate=RDFS.label).toPython() == u"Baseball"
+
+# Remove
+named_graph.remove((baseball_uri, RDFS.label, Literal("Baseball")))
+named_graph.remove((baseball_uri, RDF.type, SKOS.Concept))
+
+assert named_graph.value(subject=baseball_uri) == None
