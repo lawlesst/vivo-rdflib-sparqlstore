@@ -3,7 +3,7 @@ from setuptools import setup
 description = 'RDFLib SPARQLStore and SPARQLUpdateStore implementation for VIVO.'
 
 setup(
-    name = 'rdflib-vivo-sparqlstore',
+    name = 'vivo-rdflib-sparqlstore',
     version = '0.0.1',
     url = 'https://github.com/lawlesst/rdflib-vivo-sparqlstore',
     author = 'Ted Lawless',
