@@ -2,3 +2,4 @@
 basic.py
 .env
 .idea/
+vivo_rdflib_sparqlstore.egg-info/

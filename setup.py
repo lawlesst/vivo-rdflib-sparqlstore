@@ -13,5 +13,11 @@ setup(
     description = description,
     install_requires=[
         'rdflib>=4.2',
+        'click'
     ],
+    entry_points='''
+        [console_scripts]
+        vivoUpdate=command:process
+    '''
 )
+
