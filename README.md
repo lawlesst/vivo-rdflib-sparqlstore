@@ -6,6 +6,8 @@ The VIVO SPARQL APIs require a user email and password for authentication.
 
 See [RDFLib's docs](http://rdflib.readthedocs.org/en/latest/apidocs/rdflib.plugins.stores.html?highlight=sparqlstore#module-rdflib.plugins.stores.sparqlstore) for detailed documentation on the SPARQLStore implementation.
 
+[![Build Status](https://travis-ci.org/lawlesst/vivo-rdflib-sparqlstore.svg?branch=master)](https://travis-ci.org/lawlesst/vivo-rdflib-sparqlstore)
+
 ## Install
 
 ```
