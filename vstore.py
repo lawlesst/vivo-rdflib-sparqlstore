@@ -1,6 +1,6 @@
 """
 Extension to RDFLib SPARQLStore and SPARQLUpdateStore for use with VIVO/Vitro's built
-in SPARQL query and update API. The VIVO implemenation requires all SPARQL requests to
+in SPARQL query and update API. The VIVO implementation requires all SPARQL requests to
 contain a "email" and "password" HTTP parameters to authenticate the request.
 """
 
@@ -10,6 +10,8 @@ from rdflib.plugins.stores.sparqlstore import (
     SPARQLUpdateStore,
     NSSPARQLWrapper,
 )
+
+from bulk import BulkUpdateGraph
 
 class VIVOWrapper(NSSPARQLWrapper):
     def setQuery(self, query):
@@ -32,10 +34,9 @@ class VIVOStore(VIVOWrapper, SPARQLStore):
         super(SPARQLStore, self).__init__(**kwargs)
 
 
-class VIVOUpdateStore(VIVOStore, SPARQLUpdateStore):
+class VIVOUpdateStore(VIVOStore, SPARQLUpdateStore, BulkUpdateGraph):
     def __init__(self, email, password, **kwargs):
         self.email = email
         self.password = password
         super(VIVOStore, self).__init__(**kwargs)
         super(SPARQLUpdateStore, self).__init__(**kwargs)
-
