@@ -1,7 +1,5 @@
 
 import os
-import logging
-logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.DEBUG)
 
 import click
 
@@ -42,7 +40,7 @@ def do_update(email, password, base, graph, named_graph, action):
 @click.option('--url', required=True, default=lambda: os.environ.get('VIVO_URL', None))
 @click.option('--named_graph', default=KB2)
 def process(triple_file, action, email, password, url, named_graph):
-
+    console("\n{}\n".format('-' * 25))
     console("VIVO url: {}".format(url))
 
     # Handle named graph
@@ -53,10 +51,11 @@ def process(triple_file, action, email, password, url, named_graph):
     graph = Graph()
     graph.parse(source=triple_file, format=fmt)
 
-    console("Read {} triples and will {} to {}".format(len(graph), action, named_graph))
+    console("Read {} triples and will {} to <{}>".format(len(graph), action, named_graph))
     # Do the update.
     do_update(email, password, url, graph, named_graph, action)
-
+    # Finish
+    console("\n{}\n".format('-' * 25))
 
 
 if __name__ == '__main__':
