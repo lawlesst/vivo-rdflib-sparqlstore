@@ -17,7 +17,7 @@ setup(
     description = description,
     entry_points='''
         [console_scripts]
-        vivoUpdate=command:process
+        vivoUpdate=scripts.command:process
     '''
 )
 
