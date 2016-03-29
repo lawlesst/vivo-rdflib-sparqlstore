@@ -17,7 +17,7 @@ setup(
     ],
     entry_points='''
         [console_scripts]
-        vivoUpdate=command:process
+        vivoUpdate=vstore.command:process
     '''
 )
 
