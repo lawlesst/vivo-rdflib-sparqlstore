@@ -15,7 +15,7 @@ pip install git+https://github.com/lawlesst/rdflib-vivo-sparqlstore.git
 ```
 
 ## Command line tool
-A command line tool is included for adding or removing files for triples to VIVO. This can be a quick way to insert data into VIVO. 
+A command line tool is included for adding or removing files of triples to/from VIVO. This can be a quick way to insert data into VIVO. 
 
 ```
 $ vivoUpdate --help
