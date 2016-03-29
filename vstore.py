@@ -11,7 +11,7 @@ from rdflib.plugins.stores.sparqlstore import (
     NSSPARQLWrapper,
 )
 
-from .bulk import BulkUpdateGraph
+from bulk import BulkUpdateGraph
 
 class VIVOWrapper(NSSPARQLWrapper):
     def setQuery(self, query):
