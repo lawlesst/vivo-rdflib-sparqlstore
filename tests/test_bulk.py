@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from bulk import BulkUpdateGraph
+from vstore.bulk import BulkUpdateGraph
 from rdflib import Graph, URIRef
 
 

@@ -1,4 +1,4 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 
 description = 'RDFLib SPARQLStore and SPARQLUpdateStore implementation for VIVO.'
 
@@ -11,13 +11,13 @@ setup(
     url = 'https://github.com/lawlesst/rdflib-vivo-sparqlstore',
     author = 'Ted Lawless',
     author_email = 'lawlesst@gmail.com',
-    py_modules = ['vstore', 'vivoUpdate'],
-    scripts = ['vstore.py'],
-    description = description,
+    packages=find_packages(),
     install_requires=required,
+    include_package_data=True,
+    description = description,
     entry_points='''
         [console_scripts]
-        vivoUpdate=vivoUpdate:process
+        vivoUpdate=command:process
     '''
 )
 
