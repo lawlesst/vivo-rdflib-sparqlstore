@@ -14,31 +14,6 @@ See [RDFLib's docs](http://rdflib.readthedocs.org/en/latest/apidocs/rdflib.plugi
 pip install git+https://github.com/lawlesst/rdflib-vivo-sparqlstore.git
 ```
 
-## Command line tool
-A command line tool is included for adding or removing files of triples to/from VIVO. This can be a quick way to insert data into VIVO. 
-
-```
-$ vivoUpdate --help
-Usage: vivoUpdate [OPTIONS] TRIPLE_FILE ACTION
-
-  Pass in the file to add or remove and the action 'add' or 'remove'.
-
-Options:
-  --email TEXT        [required]
-  --password TEXT     [required]
-  --url TEXT          [required]
-  --named_graph TEXT
-  --help              Show this message and exit.
-```
-
-The email, password, and url options will be read from environment variables if set.
-
-```
-$ export VIVO_EMAIL=you@example.org
-$ export VIVO_PASSWORD=xxxx
-$ export VIVO_URL=http://vivo.example.org/
-```
-
 ## API Usage
 
 See [example.py](./example.py) for example usage.
@@ -71,4 +46,29 @@ Concept:  http://vivoweb.org/ontology/core#yearMonthPrecision
 Concept:  http://vivoweb.org/ontology/core#yearPrecision
 Concept:  http://vivoweb.org/ontology/core#yearMonthDayTimePrecision
 Concept:  http://vivoweb.org/ontology/core#yearMonthDayPrecision
+```
+
+## Command line tool
+A command line tool is included for adding or removing files of triples to/from VIVO. This can be a quick way to insert data into VIVO. 
+
+```
+$ vivoUpdate --help
+Usage: vivoUpdate [OPTIONS] TRIPLE_FILE ACTION
+
+  Pass in the file to add or remove and the action 'add' or 'remove'.
+
+Options:
+  --email TEXT        [required]
+  --password TEXT     [required]
+  --url TEXT          [required]
+  --named_graph TEXT
+  --help              Show this message and exit.
+```
+
+The email, password, and url options will be read from environment variables if set.
+
+```
+$ export VIVO_EMAIL=you@example.org
+$ export VIVO_PASSWORD=xxxx
+$ export VIVO_URL=http://vivo.example.org/
 ```
