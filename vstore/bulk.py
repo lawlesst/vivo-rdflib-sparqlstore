@@ -49,10 +49,10 @@ class BulkUpdateGraph(ConjunctiveGraph):
         if total > 0:
             for set_size, nt in self.nt_yielder(graph, size):
                 if is_add is True:
-                    logger.debug("Adding {} statements to <{}>.".format(set_size, named_graph))
+                    logger.info("Adding {} statements to <{}>.".format(set_size, named_graph))
                     self.update(u'INSERT DATA { GRAPH %s { %s } }' % (context.n3(), nt))
                 else:
-                    logger.debug("Removing {} statements from <{}>.".format(set_size, named_graph))
+                    logger.info("Removing {} statements from <{}>.".format(set_size, named_graph))
                     self.update(u'DELETE DATA { GRAPH %s { %s } }' % (context.n3(), nt))
         return total
 
