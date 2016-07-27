@@ -11,7 +11,7 @@ DEFAULT_CHUNK_SIZE = 8000
 DEFAULT_GRAPH = "http://vitro.mannlib.cornell.edu/default/vitro-kb-2"
 
 
-class BulkUpdateGraph(Dataset):
+class VIVODataset(Dataset):
 
     @staticmethod
     def make_batch(size, graph):
@@ -88,7 +88,6 @@ class BulkUpdateGraph(Dataset):
         """
         for var in [uri1, uri2, graph]:
             assert type(var) == URIRef
-        #graph1 = self.query(rq, initBindings=dict(uri=uri1, g=graph))
         addg = Graph()
         removeg = Graph()
         rsp2 = self.query(rq, initBindings=dict(uri=uri2, g=graph))

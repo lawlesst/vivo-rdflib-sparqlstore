@@ -11,7 +11,7 @@ from rdflib.plugins.stores.sparqlstore import (
     NSSPARQLWrapper,
 )
 
-from bulk import BulkUpdateGraph
+from dataset import VIVODataset
 
 class VIVOWrapper(NSSPARQLWrapper):
     def setQuery(self, query):
@@ -34,7 +34,7 @@ class VIVOStore(VIVOWrapper, SPARQLStore):
         super(SPARQLStore, self).__init__(**kwargs)
 
 
-class VIVOUpdateStore(VIVOStore, SPARQLUpdateStore, BulkUpdateGraph):
+class VIVOUpdateStore(VIVOStore, SPARQLUpdateStore, VIVODataset):
     def __init__(self, email, password, **kwargs):
         self.email = email
         self.password = password

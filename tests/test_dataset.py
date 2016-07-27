@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from vstore.bulk import BulkUpdateGraph, DEFAULT_GRAPH
+from vstore.dataset import VIVODataset, DEFAULT_GRAPH
 from rdflib import Graph, URIRef, Dataset, Namespace
 
 SKOS = Namespace("http://www.w3.org/2004/02/skos/core#")
@@ -66,7 +66,7 @@ class TestBulkUpdate(TestCase):
         Test yielder returns proper number of triple sets.
         """
         g = Graph().parse(data=sample, format="turtle")
-        bu = BulkUpdateGraph()
+        bu = VIVODataset()
         chunks = 0
         for num, nt in bu.nt_yielder(g, 4):
             chunks += 1
@@ -80,13 +80,13 @@ class TestBulkUpdate(TestCase):
     def test_bulk_add(self):
         g = Graph().parse(data=sample, format="turtle")
         named_graph = URIRef("http://localhost/test/data")
-        bu = BulkUpdateGraph()
+        bu = VIVODataset()
         added = bu.bulk_add(named_graph, g, size=4)
         self.assertEqual(added, 12)
 
     def test_bulk_remove(self):
         named_graph = URIRef("http://localhost/test/data")
-        bu = BulkUpdateGraph()
+        bu = VIVODataset()
         added = bu.bulk_add(named_graph, self.g, size=4)
         # Remove 4 triples.
         rg = Graph().parse(data=sample2, format="turtle")
@@ -100,7 +100,7 @@ class TestBulkUpdate(TestCase):
         related = URIRef("http://vivo.school.edu/individual/sports")
         uri1 = URIRef("http://vivo.school.edu/individual/topic1")
         uri2 = URIRef("http://vivo.school.edu/individual/topic2")
-        bu = BulkUpdateGraph()
+        bu = VIVODataset()
         named_graph = URIRef("http://localhost/test/data")
         g = bu.graph(named_graph)
         g.parse(data=sample3, format="turtle")
