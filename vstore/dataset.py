@@ -71,6 +71,9 @@ class VIVODataset(Dataset):
         return self.bulk_update(named_graph, add, size, is_add=False)
 
     def merge_uris(self, uri1, uri2, graph=DEFAULT_GRAPH):
+        """
+        Generate statements to merge two URIS in a specified graph.
+        """
         rq = """
         CONSTRUCT {
             ?uri ?p ?o .
