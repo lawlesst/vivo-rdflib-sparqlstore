@@ -11,6 +11,12 @@ See [RDFLib's docs](http://rdflib.readthedocs.org/en/latest/apidocs/rdflib.plugi
 ## Install
 
 ```
+pip install vivo-rdflib-sparqlstore
+```
+
+For the latest development version, install directly from Github.
+
+```
 pip install git+https://github.com/lawlesst/rdflib-vivo-sparqlstore.git
 ```
 
