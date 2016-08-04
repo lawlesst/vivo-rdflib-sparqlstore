@@ -1,6 +1,6 @@
 from itertools import islice
 
-from rdflib import Dataset, URIRef, Graph
+from rdflib import ConjunctiveGraph, URIRef, Graph
 
 import logging
 logger = logging.getLogger(__name__)
@@ -11,7 +11,7 @@ DEFAULT_CHUNK_SIZE = 8000
 DEFAULT_GRAPH = "http://vitro.mannlib.cornell.edu/default/vitro-kb-2"
 
 
-class VIVODataset(Dataset):
+class VIVOUtilsGraph(ConjunctiveGraph):
 
     @staticmethod
     def make_batch(size, graph):

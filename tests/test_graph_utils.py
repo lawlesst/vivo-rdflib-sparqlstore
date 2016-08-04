@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from vstore.dataset import VIVODataset, DEFAULT_GRAPH
+from vstore.graph_utils import VIVOUtilsGraph, DEFAULT_GRAPH
 from rdflib import Graph, URIRef, Dataset, Namespace
 
 SKOS = Namespace("http://www.w3.org/2004/02/skos/core#")
@@ -66,7 +66,7 @@ class TestBulkUpdate(TestCase):
         Test yielder returns proper number of triple sets.
         """
         g = Graph().parse(data=sample, format="turtle")
-        bu = VIVODataset()
+        bu = VIVOUtilsGraph()
         chunks = 0
         for num, nt in bu.nt_yielder(g, 4):
             chunks += 1
@@ -80,13 +80,13 @@ class TestBulkUpdate(TestCase):
     def test_bulk_add(self):
         g = Graph().parse(data=sample, format="turtle")
         named_graph = URIRef("http://localhost/test/data")
-        bu = VIVODataset()
+        bu = VIVOUtilsGraph()
         added = bu.bulk_add(named_graph, g, size=4)
         self.assertEqual(added, 12)
 
     def test_bulk_remove(self):
         named_graph = URIRef("http://localhost/test/data")
-        bu = VIVODataset()
+        bu = VIVOUtilsGraph()
         added = bu.bulk_add(named_graph, self.g, size=4)
         # Remove 4 triples.
         rg = Graph().parse(data=sample2, format="turtle")
@@ -100,12 +100,12 @@ class TestBulkUpdate(TestCase):
         related = URIRef("http://vivo.school.edu/individual/sports")
         uri1 = URIRef("http://vivo.school.edu/individual/topic1")
         uri2 = URIRef("http://vivo.school.edu/individual/topic2")
-        bu = VIVODataset()
+        my_vstore = VIVOUtilsGraph()
         named_graph = URIRef("http://localhost/test/data")
-        g = bu.graph(named_graph)
+        g = Graph()
         g.parse(data=sample3, format="turtle")
-        bu.add_graph(g)
-        add, remove = bu.merge_uris(uri1, uri2, named_graph)
+        my_vstore.bulk_add(named_graph, g)
+        add, remove = my_vstore.merge_uris(uri1, uri2, named_graph)
 
         # make sure statements have been moved to new uri
         self.assertTrue(related in [u for u in add.subjects(predicate=SKOS.narrower, object=uri1)])
@@ -116,8 +116,8 @@ class TestBulkUpdate(TestCase):
         self.assertEqual(u"Hardball", remove.value(subject=uri2, predicate=SKOS.altLabel).toPython())
 
         # do the update
-        rm_stmts = bu.bulk_remove(named_graph, remove)
-        add_stmts = bu.bulk_add(named_graph, add)
+        rm_stmts = my_vstore.bulk_remove(named_graph, remove)
+        add_stmts = my_vstore.bulk_add(named_graph, add)
 
         # test merge sizes
         self.assertEqual(rm_stmts, 4)
@@ -125,5 +125,5 @@ class TestBulkUpdate(TestCase):
         self.assertEqual(rm_stmts, add_stmts)
 
         # retrieve a merged statement from store
-        self.assertEqual(u"Hardball", g.value(subject=uri1, predicate=SKOS.altLabel).toPython())
-        self.assertEqual(None, g.value(subject=uri2, predicate=SKOS.altLabel))
+        self.assertEqual(u"Hardball", my_vstore.value(subject=uri1, predicate=SKOS.altLabel).toPython())
+        self.assertEqual(None, my_vstore.value(subject=uri2, predicate=SKOS.altLabel))
