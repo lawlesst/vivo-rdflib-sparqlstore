@@ -29,7 +29,7 @@ def do_update(email, password, base, graph, named_graph, action):
         console("{} triples added to {}.".format(added, named_graph.n3()))
     else:
         removed = store.bulk_remove(named_graph, graph)
-        console("{} triples added to {}.".format(removed, named_graph.n3()))
+        console("{} triples removed from {}.".format(removed, named_graph.n3()))
 
 
 @click.command(help="Pass in the file to add or remove and the action 'add' or 'remove'.")
