@@ -10,8 +10,9 @@ setup(
     author_email='lawlesst@gmail.com',
     packages=find_packages(),
     install_requires=[
-        'rdflib>=4',
-        'click'
+        'rdflib==4.2',
+        'SPARQLWrapper==1.8',
+        'click==5.0'
     ],
     include_package_data=True,
     description=description,
