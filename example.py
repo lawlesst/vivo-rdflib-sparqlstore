@@ -47,7 +47,7 @@ g.parse(data=
 """
 , format="turtle")
 
-print g.serialize(format='n3')
+print(g.serialize(format='n3'))
 
 
 # Add the data using the RDFLib API
@@ -55,7 +55,7 @@ named_graph += g
 
 # List all concepts in the named graph.
 for subj in named_graph.subjects(predicate=RDF.type, object=SKOS.Concept):
-    print 'Concept: ', subj
+    print('Concept: ', subj)
 
 # Remove the graph
 named_graph -= g

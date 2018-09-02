@@ -11,7 +11,7 @@ from rdflib.plugins.stores.sparqlstore import (
     NSSPARQLWrapper,
 )
 
-from graph_utils import VIVOUtilsGraph
+from .graph_utils import VIVOUtilsGraph
 
 class VIVOWrapper(NSSPARQLWrapper):
     def setQuery(self, query):

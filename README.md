@@ -1,6 +1,8 @@
 ## vivo-rdflib-sparqlstore
 
-A RDFLib [SPARQLStore implementation](http://rdflib.readthedocs.org/en/latest/apidocs/rdflib.plugins.stores.html#rdflib.plugins.stores.sparqlstore.SPARQLUpdateStore) for the [VIVO](http://vivoweb.org/) [SPARQL query](https://wiki.duraspace.org/display/VIVO/The+SPARQL+Query+API) and [update](https://wiki.duraspace.org/display/VIVO/The+SPARQL+Update+API) APIs.
+A RDFLib [SPARQLStore implementation](http://rdflib.readthedocs.org/en/latest/apidocs/rdflib.plugins.stores.html#rdflib.plugins.stores.sparqlstore.SPARQLUpdateStore) for the [VIVO](http://vivoweb.org/) [SPARQL query and update](https://wiki.duraspace.org/display/VIVODOC110x/VIVO+APIs) APIs.
+
+This library supports Python 2.7 and 3.5+.
 
 The VIVO SPARQL APIs require a user email and password for authentication.
 

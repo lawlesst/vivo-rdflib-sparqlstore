@@ -1,1 +1,1 @@
-from vstore import VIVOStore, VIVOUpdateStore
+from .vstore import VIVOStore, VIVOUpdateStore

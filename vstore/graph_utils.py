@@ -52,10 +52,10 @@ class VIVOUtilsGraph(ConjunctiveGraph):
             for set_size, nt in self.nt_yielder(graph, size):
                 if is_add is True:
                     logger.info("Adding {} statements to <{}>.".format(set_size, named_graph))
-                    self.update(u'INSERT DATA { GRAPH %s { %s } }' % (context.n3(), nt))
+                    self.update(u'INSERT DATA { GRAPH %s { %s } }' % (context.n3(), nt.decode('utf-8')))
                 else:
                     logger.info("Removing {} statements from <{}>.".format(set_size, named_graph))
-                    self.update(u'DELETE DATA { GRAPH %s { %s } }' % (context.n3(), nt))
+                    self.update(u'DELETE DATA { GRAPH %s { %s } }' % (context.n3(), nt.decode('utf-8')))
         return total
 
     def bulk_add(self, named_graph, add, size=DEFAULT_CHUNK_SIZE):
